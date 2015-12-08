@@ -7,7 +7,9 @@ import java.util.List;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitScheduler;
@@ -20,8 +22,9 @@ import xyz.tulipplugins.minigame.teams.Kits;
 
 
 public class Minigame extends JavaPlugin implements Listener {
-	
-	
+	LinkedList<Player> bluePlayers = new LinkedList<Player>();
+	LinkedList<Player> redPlayers = new LinkedList<Player>();
+	private boolean gameStarted;
 	public static Minigame instance;
 	public static Permission permission = null;
 	public static Economy economy = null;
@@ -63,8 +66,7 @@ public class Minigame extends JavaPlugin implements Listener {
 	}
 
 	public void StartCountdown(Player player, List<Player> playerlist, Player name0, Player name1, Player name2, Player name3, Player name4, Player name5, Player name6, Player name7, Player name8, Player name9){
-		LinkedList<Player> bluePlayers = new LinkedList<Player>();
-		LinkedList<Player> redPlayers = new LinkedList<Player>();
+		
 		int i = 10;
 		BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
 		scheduler.scheduleSyncRepeatingTask(this, new Runnable(){
@@ -88,7 +90,7 @@ public class Minigame extends JavaPlugin implements Listener {
 					KitObject.startGame(name0, name1, name2, name3, name4, name5, name6, name7, name8, name9);
 					MainScoreboard ScoreboardObject = new MainScoreboard();
 					ScoreboardObject.setupScoreboard(bluePlayers, redPlayers);
-					
+					gameStarted = true;
 					
 				}
 				
@@ -101,11 +103,40 @@ public class Minigame extends JavaPlugin implements Listener {
 		
 		
 	}
+	@EventHandler
+	public void onPlayerChat(PlayerChatEvent event){
+		Player player = event.getPlayer();
+		String message = event.getMessage();
+		
+		if (gameStarted == true){
+			
+			if (bluePlayers.contains(player)){
+				
+				for (Player p : bluePlayers){
+					player.sendMessage(ChatColor.BLUE + "[Team] " + message);
+					
+					
+				}
+				
+				
+			}
+				
+				
+				
+				
+			}
+			
+			
+			
+			
+		}
 	
+		
+	}
 
 	
 	
-	}
+	
 	
 
 
