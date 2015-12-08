@@ -17,15 +17,16 @@ import org.bukkit.scheduler.BukkitScheduler;
 import net.milkbowl.vault.chat.Chat;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
+import xyz.tulipplugins.minigame.commands.GameCommands;
 import xyz.tulipplugins.minigame.scoreboard.MainScoreboard;
 import xyz.tulipplugins.minigame.teams.Kits;
 
 
 public class Minigame extends JavaPlugin implements Listener {
-	LinkedList<Player> bluePlayers = new LinkedList<Player>();
-	LinkedList<Player> redPlayers = new LinkedList<Player>();
+	public LinkedList<Player> bluePlayers = new LinkedList<Player>();
+	public LinkedList<Player> redPlayers = new LinkedList<Player>();
 	private boolean gameStarted;
-	public static Minigame instance;
+	
 	public static Permission permission = null;
 	public static Economy economy = null;
 	public static Chat chat = null;
@@ -60,7 +61,6 @@ public class Minigame extends JavaPlugin implements Listener {
 	}
 
 	public void onEnable(){
-		instance = this;
 		
 		
 	}
@@ -117,6 +117,14 @@ public class Minigame extends JavaPlugin implements Listener {
 					
 					
 				}
+				if (redPlayers.contains(player)){
+					for (Player p : bluePlayers){
+						player.sendMessage(ChatColor.RED + "[Team] " + message);
+						
+						
+					}
+					
+				}
 				
 				
 			}
@@ -130,6 +138,7 @@ public class Minigame extends JavaPlugin implements Listener {
 			
 			
 		}
+	
 	
 		
 	}

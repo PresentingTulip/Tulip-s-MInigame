@@ -1,6 +1,8 @@
 package xyz.tulipplugins.minigame.teams;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.bukkit.entity.Player;
@@ -8,10 +10,11 @@ import org.bukkit.entity.Player;
 import xyz.tulipplugins.minigame.Minigame;
 
 public class Teams {
-	List<Integer> bluePlayers = Arrays.asList();
-	List<Integer> redPlayers = Arrays.asList();  
+	public ArrayList<Integer> bluePlayers = new ArrayList<Integer>();
+	public ArrayList<Integer> redPlayers = new ArrayList<Integer>();  
+	public LinkedList<Player> playerlist = new LinkedList<Player>();
 	public void teamCount(Player player){
-		List<Player> playerlist = Arrays.asList();
+	
 		
 		if (playerlist.size() < 10){
 			playerlist.add(player);
